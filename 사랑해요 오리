@@ -1,0 +1,30 @@
+def check(i,j):
+    return 0 <=i<n and 0 <= j< n
+def BFS(i,j):
+    x=[1,0,-1,0]
+    y=[0,1,0,-1]
+    visited=[]
+    queue=[(i,j)]
+    m[i][j]=2
+    while queue: 
+        v = queue.pop()
+        if v not in visited: 
+            visited.append(v) 
+        for k in range(4):
+            if check(v[0]+y[k],v[1]+x[k]) and m[v[0]+y[k]][v[1]+x[k]]=='1':
+                queue.insert(0, (v[0]+y[k],v[1]+x[k]))
+                m[v[0]+y[k]][v[1]+x[k]]=2             
+    return len(visited)
+n =int(input())
+m=[]
+for i in range(n):
+    m.append(list(input()))
+apt=[]
+for i in range(n):
+    for j in range(n):
+        if m[i][j]=='1':
+            apt.append(BFS(i,j))
+print(len(apt))
+for i in sorted(apt):
+    print(i)
+
